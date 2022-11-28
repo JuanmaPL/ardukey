@@ -1,0 +1,12 @@
+[
+    {
+        "icon": "home-sharp",
+        "name": "Inicio",
+        "redirectTo": "/inicio"
+    },
+    {
+        "icon": "home-sharp",
+        "name": "Inicio",
+        "redirectTo": "/inicio"
+    }
+]
