@@ -5,8 +5,23 @@
         "redirectTo": "/inicio"
     },
     {
+        "icon": "log-in-sharp",
+        "name": "Iniciar Sesión",
+        "redirectTo": "/login"
+    },
+    {
         "icon": "home-sharp",
-        "name": "Inicio",
-        "redirectTo": "/inicio"
+        "name": "Tabs",
+        "redirectTo": "/tabs"
+    },
+    {
+        "icon": "settings-sharp",
+        "name": "Configuración",
+        "redirectTo": "/settings"
+    },
+    {
+        "icon": "information-circle-sharp",
+        "name": "Acerca de",
+        "redirectTo": "/info"
     }
 ]
