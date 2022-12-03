@@ -1,12 +1,12 @@
   <ion-menu side="start" type="overlay" menuId="menu" contentId="principal">
 
-    <ion-header>
+    <ion-header [translucent]="true">
       <ion-toolbar color="primary">
         <ion-title size="small">ArduKey</ion-title>
       </ion-toolbar>
     </ion-header>
 
-    <ion-content>
+    <ion-content [fullscreen]="true">
 
       <ion-list>
         <ion-menu-toggle *ngFor="let opcion of opcionesMenu | async" autoHide="false">

@@ -2,16 +2,6 @@
     {
         "icon": "home-sharp",
         "name": "Inicio",
-        "redirectTo": "/inicio"
-    },
-    {
-        "icon": "log-in-sharp",
-        "name": "Iniciar Sesión",
-        "redirectTo": "/login"
-    },
-    {
-        "icon": "home-sharp",
-        "name": "Tabs",
         "redirectTo": "/tabs"
     },
     {
