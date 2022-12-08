@@ -26,11 +26,11 @@ const routes: Routes = [
   {
     path: 'info',
     loadChildren: () => import('./pages/info/info.module').then(m => m.InfoPageModule)
-  },
-
-
-
-
+  }
+  // ,{
+  //   path: 'reservar',
+  //   loadChildren: () => import('./pages/reservar/reservar.module').then( m => m.ReservarPageModule)
+  // },
 ];
 
 @NgModule({

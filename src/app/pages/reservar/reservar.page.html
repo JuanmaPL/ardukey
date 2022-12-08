@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>reservar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-datetime #reserva
+                mode="ios"
+                presentation="date"
+                [multiple]="true"
+                (ionChange)="cambios($event)">
+
+    <ion-buttons slot="buttons">
+      <ion-button color="primary" (click)="reserva.confirm()">Done</ion-button>
+      <ion-button color="warning" (click)="reserva.reset()">Reset</ion-button>
+      <ion-button color="danger" (click)="reserva.cancel()">Cancel</ion-button>
+    </ion-buttons>
+
+  </ion-datetime>
+
+</ion-content>
