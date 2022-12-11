@@ -6,18 +6,59 @@
 
 <ion-content class="ion-padding">
 
-  <ion-datetime #reserva
-                mode="ios"
-                presentation="date"
-                [multiple]="true"
-                (ionChange)="cambios($event)">
+  <ion-list>
 
-    <ion-buttons slot="buttons">
-      <ion-button color="primary" (click)="reserva.confirm()">Done</ion-button>
-      <ion-button color="warning" (click)="reserva.reset()">Reset</ion-button>
-      <ion-button color="danger" (click)="reserva.cancel()">Cancel</ion-button>
-    </ion-buttons>
+    <ion-list-header>
+      <ion-label>Datos de la reserva</ion-label>
+    </ion-list-header>
 
-  </ion-datetime>
+    <ion-item>
+      <ion-label>Fecha de llegada</ion-label>
+      <ion-datetime-button datetime="reserva"></ion-datetime-button>
+    </ion-item>
+
+  </ion-list>
 
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-button color="success" (click)="reservado()">
+        Reservar
+        <ion-icon slot="end" name="checkmark-circle-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="cancelado()">
+        Cancelar
+        <ion-icon slot="end" name="close-circle-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-footer>
+
+
+
+
+
+
+
+
+<!-- Montamos el calendario  -->
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime #reserva id="reserva" mode="ios" presentation="date" [multiple]="true" (ionChange)="cambios($event)">
+
+      <ion-buttons slot="buttons">
+        <ion-button color="primary" (click)="reserva.confirm()">Done</ion-button>
+        <ion-button color="warning" (click)="reserva.reset()">Reset</ion-button>
+        <ion-button color="danger" (click)="reserva.cancel()">Cancel</ion-button>
+      </ion-buttons>
+
+    </ion-datetime>
+  </ng-template>
+</ion-modal>

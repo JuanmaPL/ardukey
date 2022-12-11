@@ -19,13 +19,11 @@ export class AlojamientoComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: ReservarPage,
     });
-    modal.present();
 
-    // const { data, role } = await modal.onWillDismiss();
+    await modal.present();
 
-    // if (role === 'confirm') {
-    //   this.message = `Hello, ${data}!`;
-    // }
+    const { data } = await modal.onWillDismiss();
+    console.log(data);
 
   }
 
