@@ -16,7 +16,7 @@ import { AlojamientoComponent } from './alojamiento/alojamiento.component';
     HeaderComponent,
     HeaderTabsComponent,
     AlojamientosComponent,
-    AlojamientoComponent
+    AlojamientoComponent,
   ],
   exports: [
     MenuComponent,

@@ -10,21 +10,30 @@ export class ReservarPage implements OnInit {
 
   fechaActual: Date = new Date();
 
-  datos: string ='';
+  fechaLlegada: string = '';
+  fechaSalida: string = '';
 
   constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {
   }
 
-  cambios(event: any) {
-    console.log(event.detail.value);
+  llegada(event: any) {
+    this.fechaLlegada = event.detail.value;
+    console.log(this.fechaLlegada);
+  }
+
+  salida(event: any) {
+    this.fechaSalida = event.detail.value;
+    console.log(this.fechaSalida);
   }
 
   //Método que cierra el modal y envía como argumentos los datos de la reserva
   reservado() {
     this.modalCtrl.dismiss({
-
+      reservado: 'Reserva realizada',
+      arrive: this.fechaLlegada,
+      exit: this.fechaSalida
     });
   }
 
