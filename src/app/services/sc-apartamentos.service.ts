@@ -29,6 +29,8 @@ export class ScApartamentosService {
         }));
       })
     );
+
+    console.log(this.apartamentos);
   }
 
  
@@ -40,7 +42,7 @@ export class ScApartamentosService {
   
   deleteApartamento(id: number) {
     
-  //  this.database.list('/apartamentos').remove(id);
+    this.database.list('/apartamentos').remove('ID');
   }
 
  
@@ -50,4 +52,6 @@ export class ScApartamentosService {
     delete apartamento.$key;
     this.database.list('/apartamentos').update($key, apartamento);
   }
+
+ 
 }

@@ -35,8 +35,7 @@ import { ScApartamentosService } from './services/sc-apartamentos.service';
             AngularFireModule.initializeApp(environment.firebase),
             AngularFireAuthModule,
             AngularFireStorageModule,
-            AngularFireDatabaseModule,
-            ScApartamentosService],
+            AngularFireDatabaseModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, ScApartamentosService],
   bootstrap: [AppComponent],
 })
