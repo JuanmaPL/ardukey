@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ScApartamentosService } from 'src/app/services/sc-apartamentos.service';
 
 @Component({
   selector: 'app-inicio',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioPage implements OnInit {
 
-  constructor() { }
+  constructor(private scApartamentos: ScApartamentosService) { }
 
   ngOnInit() {
+
+  
+    this.scApartamentos.getApartamentos();
   }
 
 }
