@@ -12,6 +12,7 @@ export class InicioPage implements OnInit {
 
   ngOnInit() {
 
+  
     this.scApartamentos.getApartamentos();
   }
 

@@ -3,6 +3,7 @@ export const environment = {
   firebase: {
     apiKey: "AIzaSyDpPqhVJxaLnZM5NYSgNI1klig0ro77ASc",
     authDomain: "ardukey-c06e8.firebaseapp.com",
+    
     projectId: "ardukey-c06e8",
     storageBucket: "ardukey-c06e8.appspot.com",
     messagingSenderId: "758756243451",
