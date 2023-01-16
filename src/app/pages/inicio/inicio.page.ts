@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ScApartamentosService } from 'src/app/services/sc-apartamentos.service';
+import { Apartamento } from 'src/app/interfaces/interfaces';
 
 @Component({
   selector: 'app-inicio',
@@ -8,12 +10,14 @@ import { ScApartamentosService } from 'src/app/services/sc-apartamentos.service'
 })
 export class InicioPage implements OnInit {
 
+ 
   constructor(private scApartamentos: ScApartamentosService) { }
 
   ngOnInit() {
 
   
-    this.scApartamentos.getApartamentos();
+   
+    
   }
 
 }

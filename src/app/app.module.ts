@@ -7,9 +7,9 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-
-
-
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentsModule } from './components/components.module';
@@ -29,6 +29,8 @@ import { ScApartamentosService } from './services/sc-apartamentos.service';
     AppRoutingModule,
     HttpClientModule,
     ComponentsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
     
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ScApartamentosService],

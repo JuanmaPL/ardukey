@@ -1,21 +1,17 @@
 
 import { Injectable } from '@angular/core';
-
-
-
-
-
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScApartamentosService {
 
-     constructor() {
+     constructor(private firestore: AngularFirestore) {
   }
 
    getApartamentos() {
-    
+    return this.firestore.collection('apartamentos').snapshotChanges();
   }
 
 
