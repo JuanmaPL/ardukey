@@ -10,12 +10,13 @@ import { Apartamento } from 'src/app/interfaces/interfaces';
 })
 export class InicioPage implements OnInit {
 
- 
+
   constructor(private scApartamentos: ScApartamentosService) { }
 
   ngOnInit() {
 
-  
+   this.scApartamentos.getApartamentos();
+    
    
     
   }

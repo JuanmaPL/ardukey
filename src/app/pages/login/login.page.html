@@ -2,4 +2,19 @@
 
 <ion-content class="ion-padding" [fullscreen]="true">
   <ion-label>Pagina del login</ion-label>
+  <ion-item>
+
+
+    <ion-buttons slot="start">
+      <ion-button (click)="login()">
+        <ion-icon slot="start" name="person-outline"></ion-icon>
+        Login
+      </ion-button>
+      <ion-button (click)="registrar()">
+        <ion-icon slot="start" name="person-add-outline"></ion-icon>
+        Registrar
+      </ion-button>
+    </ion-buttons>
+
+  </ion-item>
 </ion-content>

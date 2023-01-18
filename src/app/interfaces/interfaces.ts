@@ -20,7 +20,7 @@ export interface Cerradura {
     CODIGO: string;
 }
 
-export interface Alquiler {
+export interface Reserva {
     IDPROP: number;
     F_INICIO: Date;
     F_FIN: Date;
