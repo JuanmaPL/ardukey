@@ -28,10 +28,10 @@
       <ion-input placeholder="ocupado o no" [(ngModel)]="estado"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-select interface="popover" placeholder="Select fruit">
-        <ion-select-option value="apples">Apples</ion-select-option>
-        <ion-select-option value="oranges">Oranges</ion-select-option>
-        <ion-select-option value="bananas">Bananas</ion-select-option>
+      <ion-select interface="popover" placeholder="Seleccione cerradura" [(ngModel)]="idkey">
+        <ion-select-option *ngFor="let documentCerraduras of coleccionCerraduras" value="{{documentCerraduras.id}}">{{documentCerraduras.data.CODIGO}}</ion-select-option>
+        <!--<ion-select-option value="oranges">Oranges</ion-select-option>
+        <ion-select-option value="bananas">Bananas</ion-select-option>-->
       </ion-select>
     </ion-item> <ion-item>
       <ion-label position="floating">latitud</ion-label>

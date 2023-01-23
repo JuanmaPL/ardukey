@@ -4,6 +4,8 @@ import { ModalController } from '@ionic/angular';
 import { ImgService } from 'src/app/services/img.service';
 import { Geolocation } from '@capacitor/geolocation';
 import { FormsModule } from '@angular/forms';
+import { Cerradura } from 'src/app/interfaces/interfaces';
+import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
   selector: 'app-insertar-apart',
@@ -26,14 +28,50 @@ export class InsertarApartComponent implements OnInit {
   foto: any;
   preview: any;
   uid: any;
+  //cerraduras
+  coleccionCerraduras: any = [{
+    id: "",
+    data: {} as Cerradura
+   }];
 
   constructor(
     private modalCtrl: ModalController,
     public img: ImgService,
+    private firestoreService: FirestoreService,
   ) { this.uid = localStorage.getItem('uid'); }
 
   ngOnInit() {
     this.obtenerSitio();
+    this.firestoreService.consultarPorCampo('cerraduras','ACTIVA',false).subscribe((resultadoConsultaCerraduras: any[]) => {
+      this.coleccionCerraduras = [];
+      console.log('dentro de resultadoConsulta');
+      resultadoConsultaCerraduras.forEach((datosTarea: any) => {
+        this.coleccionCerraduras.push({
+          id: datosTarea.payload.doc.id,
+          data: datosTarea.payload.doc.data()
+        });
+         console.log(this.coleccionCerraduras);
+        
+      })
+    });
+      
+    //console.log(this.coleccionCerraduras);
+    
+    /**
+     *   this.firestoreService.consultar("apartamentos").subscribe((resultadoConsultaTareas: any[]) => {
+      this.coleccionApartamentos = [];
+      console.log('dentro de resultadoConsulta');
+      resultadoConsultaTareas.forEach((datosTarea: any) => {
+        this.coleccionApartamentos.push({
+          id: datosTarea.payload.doc.id,
+          data: datosTarea.payload.doc.data()
+        });
+     */
+
+
+
+   
+
   }
   async sacarFoto() {
     try {
@@ -59,6 +97,7 @@ export class InsertarApartComponent implements OnInit {
     this.lon = this.position.coords.longitude;
 
   }
+  obtenerKey(){}
 
   insertar() {
     const apartamento = {

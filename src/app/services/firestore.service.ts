@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, fromCollectionRef } from '@angular/fire/compat/firestore';
 
 
 @Injectable({
@@ -27,6 +27,19 @@ export class FirestoreService {
 
    public consultarPorId(coleccion: string, documentId: string) {
     return this.angularFirestore.collection(coleccion).doc(documentId).snapshotChanges();
+
   }
 
+  /**
+  this.comments$ = afs.collectionGroup('Comments', ref => ref.where('user', '==', userId))
+                      .valueChanges({ idField: 'docId' });
+ */
+  public consultarPorCampo (coleccion:string, campo: string, predicado:any) {
+    console.log(coleccion ,campo,predicado);
+    return this.angularFirestore.collection(coleccion, ref => ref.where(campo, '==' ,predicado)).snapshotChanges();
+  }
+  
+
 }
+
+
