@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Reserva alojamiento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-list>
+
+    <ion-list-header>
+      <h3>Datos de la reserva</h3>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>Fecha de llegada</ion-label>
+      <ion-datetime-button datetime="llegada"></ion-datetime-button>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Fecha de salida</ion-label>
+      <ion-datetime-button datetime="salida"></ion-datetime-button>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-button color="success" (click)="reservado()">
+        Reservar
+        <ion-icon slot="end" name="checkmark-circle-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="cancelado()">
+        Cancelar
+        <ion-icon slot="end" name="close-circle-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-footer>
+
+
+
+<!-- *************************************************************************************** -->
+
+
+
+<!-- Montamos el calendario de fecha de llegada  -->
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime #date0
+                  id="llegada"
+                  mode="ios"
+                  presentation="date"
+                  [multiple]="true"
+                  [firstDayOfWeek]="1"
+                  [min]="fechaActual.toISOString()"
+                  (ionChange)="llegada($event)">
+
+      <ion-buttons slot="buttons">
+        <ion-button color="primary" (click)="date0.confirm()">Done</ion-button>
+        <ion-button color="warning" (click)="date0.reset()">Reset</ion-button>
+        <ion-button color="danger" (click)="date0.cancel()">Cancel</ion-button>
+      </ion-buttons>
+
+    </ion-datetime>
+  </ng-template>
+</ion-modal>
+
+<!-- Montamos el calendario de fecha de salida  -->
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime #date1
+                  id="salida"
+                  mode="ios"
+                  presentation="date"
+                  [multiple]="true"
+                  [firstDayOfWeek]="1"
+                  [min]="fechaActual.toISOString()"
+                  (ionChange)="salida($event)">
+
+      <ion-buttons slot="buttons">
+        <ion-button color="primary" (click)="date1.confirm()">Done</ion-button>
+        <ion-button color="warning" (click)="date1.reset()">Reset</ion-button>
+        <ion-button color="danger" (click)="date1.cancel()">Cancel</ion-button>
+      </ion-buttons>
+
+    </ion-datetime>
+  </ng-template>
+</ion-modal>

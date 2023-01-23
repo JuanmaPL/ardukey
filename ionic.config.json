@@ -1,0 +1,7 @@
+{
+  "name": "ardukey",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
