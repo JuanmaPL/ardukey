@@ -43,7 +43,7 @@
             <h2>Nombre:  {{documentApartamento.data.DESCRIPCION}}</h2>
           </ion-row>
           <ion-row>
-            Codigo:  {{documentApartamento.data.DIRECCION}}
+            Direccion:  {{documentApartamento.data.DIRECCION}}
           </ion-row>
           <ion-row>
             id:  {{documentApartamento.id}}
@@ -51,7 +51,8 @@
         </ion-grid>
       </ion-item>
     <ion-item-options side="end" >
-      <ion-item-option color="danger" (click)="borrar( documentApartamento.id)">
+      <ion-item-option color="danger"
+       (click)="borrar( documentApartamento.id,documentApartamento.data.ESTADO,documentApartamento.data.IDKEY)">
         <ion-icon slot="icon-only" name="trash"></ion-icon>
       </ion-item-option>
     </ion-item-options>

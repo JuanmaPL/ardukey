@@ -26,13 +26,13 @@ export class FirestoreService {
    }
 
    public consultarPorId(coleccion: string, documentId: string) {
-    return this.angularFirestore.collection(coleccion).doc(documentId).snapshotChanges();
+    return this.angularFirestore.collection(coleccion).doc(documentId).get();
 
   }
 
   /**
-  this.comments$ = afs.collectionGroup('Comments', ref => ref.where('user', '==', userId))
-                      .valueChanges({ idField: 'docId' });
+  this.comments$ = afs.collection('Comments', ref => ref.where('user', '==', userId))
+                      .snapshotChanges();
  */
   public consultarPorCampo (coleccion:string, campo: string, predicado:any) {
     console.log(coleccion ,campo,predicado);

@@ -48,7 +48,11 @@ export class InsertarCerradComponent implements OnInit {
   }
 
   actualizar(){
-    this.cerraduraEditando.ACTIVA = this.activa;
+    if(this.activa==='true'){
+      this.cerraduraEditando.ACTIVA = true
+    } else{
+      this.cerraduraEditando.ACTIVA = false
+    }
     this.cerraduraEditando.CODIGO = this.code;
     this.firestoreService.actualizar("cerraduras", this.uid, this.cerraduraEditando);
     this.cerrar();

@@ -11,7 +11,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item >
+    <ion-item>
       <ion-label position="floating">Descripción</ion-label>
       <ion-input placeholder="Nombre" [(ngModel)]="descripcion"></ion-input>
     </ion-item>
@@ -20,20 +20,22 @@
       <ion-input placeholder="Dirección" [(ngModel)]="direccion"></ion-input>
     </ion-item>
     <ion-item button="true" (click)="sacarFoto()">
-      <img [src]="preview" *ngIf="foto;"/>
+      <img [src]="preview" *ngIf="foto;" />
       <p *ngIf="!foto">Pulse para introducir foto</p>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Estado</ion-label>
-      <ion-input placeholder="ocupado o no" [(ngModel)]="estado"></ion-input>
+      <ion-select interface="popover" placeholder="Estado del apartamento falso || true" [(ngModel)]="estado">
+        <ion-select-option value="no ocupado">No ocupado</ion-select-option>
+        <ion-select-option value="ocupado">Ocupado</ion-select-option>
+      </ion-select>
     </ion-item>
     <ion-item>
       <ion-select interface="popover" placeholder="Seleccione cerradura" [(ngModel)]="idkey">
-        <ion-select-option *ngFor="let documentCerraduras of coleccionCerraduras" value="{{documentCerraduras.id}}">{{documentCerraduras.data.CODIGO}}</ion-select-option>
-        <!--<ion-select-option value="oranges">Oranges</ion-select-option>
-        <ion-select-option value="bananas">Bananas</ion-select-option>-->
+        <ion-select-option *ngFor="let documentCerraduras of coleccionCerraduras"
+          value="{{documentCerraduras.id}}">{{documentCerraduras.data.CODIGO}}</ion-select-option>
       </ion-select>
-    </ion-item> <ion-item>
+    </ion-item>
+     <ion-item>
       <ion-label position="floating">latitud</ion-label>
       <ion-input placeholder="Latitud" [(ngModel)]="lat"></ion-input>
     </ion-item>
