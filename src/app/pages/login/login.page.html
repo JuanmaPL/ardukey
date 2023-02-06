@@ -1,20 +1,49 @@
-<app-header-tabs titulo="Login"></app-header-tabs>
+<ion-content>
+  <!-- logo -->
+  <ion-row class='logo-container ion-justify-content-center ion-align-items-center'>
+    <ion-img src='../../assets/img/cerradura.png' alt=''></ion-img>
+  </ion-row>
 
-<ion-content class="ion-padding" [fullscreen]="true">
-  <ion-label>Pagina del login</ion-label>
-  <ion-item>
-
-
-    <ion-buttons slot="start">
-      <ion-button (click)="login()">
-        <ion-icon slot="start" name="person-outline"></ion-icon>
-        Login
+  <!-- logo -->
+  <!-- form login -->
+  <form [formGroup]="loginForm">
+    <ion-row class='input-container ion-justify-content-center ion-align-items-center'>
+      <ion-item lines='none' class='ipt'>
+        <ion-input formControlName="email"  placeholder='Email'></ion-input>
+        <ion-icon name='person' slot='start'></ion-icon>
+      </ion-item>
+    </ion-row>
+   <ion-row class='input-container ion-justify-content-center ion-align-items-center'>
+      <ion-item lines='none' class='ipt'>
+        <ion-input formControlName="password" type='password' placeholder='Pass* * * * * *'></ion-input>
+        <ion-icon name='lock-closed' slot='start'></ion-icon>
+      </ion-item>
+    </ion-row>
+    <!-- button login -->
+    <ion-row class='input-container ion-justify-content-center ion-align-items-center'>
+      <ion-button (click)='login()' class='ion-text-uppercase' fill="outline" shape="round">login</ion-button>
+    </ion-row>
+    <!-- button login -->
+    <!-- button register -->
+    <ion-row class='input-container ion-justify-content-center ion-align-items-center'>
+      <ion-button (click)="register()" class='register ion-text-uppercase' shape='round' fill="outline">Create account
       </ion-button>
-      <ion-button (click)="registrar()">
-        <ion-icon slot="start" name="person-add-outline"></ion-icon>
-        Registrar
-      </ion-button>
-    </ion-buttons>
-
-  </ion-item>
+    </ion-row>
+    <ion-row class='input-container ion-justify-content-center ion-align-items-center'>
+      <ion-button (click)="logout()" fill="outline" shape="round"><ion-icon slot="start" name="log-out-outline"></ion-icon>logout</ion-button>
+    </ion-row>
+    
+    <ion-grid>
+     
+    <ion-col offset=3><ion-label class='label'> ALOJAMIENTO</ion-label>
+      </ion-col>
+  </ion-grid>
+    <!-- button register -->
+  </form>
+  <!-- form login -->
+  <ion-fab horizontal="end" vertical="bottom" position="fixed" >
+    <ion-fab-button (click)="cerrar()">
+        <ion-icon name="exit"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

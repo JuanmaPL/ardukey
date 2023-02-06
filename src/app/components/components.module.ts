@@ -6,7 +6,14 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { HeaderTabsComponent } from './header-tabs/header-tabs.component';
 import { AlojamientosComponent } from './alojamientos/alojamientos.component';
-import { AlojamientoComponent } from './alojamiento/alojamiento.component';
+import { ApartamentosComponent } from './apartamentos/apartamentos.component';
+import { InsertarApartComponent } from './insertar-apart/insertar-apart.component';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CerradurasComponent } from './cerraduras/cerraduras.component';
+import { InsertarCerradComponent } from './insertar-cerrad/insertar-cerrad.component';
+import { MapsComponent } from './maps/maps.component';
+import { RegisterComponent } from './register/register.component';
+import { ReservarComponent } from './reservar/reservar.component';
 
 
 
@@ -16,18 +23,35 @@ import { AlojamientoComponent } from './alojamiento/alojamiento.component';
     HeaderComponent,
     HeaderTabsComponent,
     AlojamientosComponent,
-    AlojamientoComponent,
+    ApartamentosComponent,
+    InsertarApartComponent,
+    CerradurasComponent,
+    InsertarCerradComponent,
+    MapsComponent,
+    RegisterComponent,
+    ReservarComponent,
+
   ],
   exports: [
     MenuComponent,
     HeaderComponent,
     HeaderTabsComponent,
-    AlojamientosComponent
+    AlojamientosComponent,
+    ApartamentosComponent,
+    InsertarApartComponent,
+    CerradurasComponent,
+    InsertarCerradComponent,
+    MapsComponent,
+    RegisterComponent,
+    ReservarComponent
   ],
   imports: [
     CommonModule,
     IonicModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+  
   ]
 })
 export class ComponentsModule { }

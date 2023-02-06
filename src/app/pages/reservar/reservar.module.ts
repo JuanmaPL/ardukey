@@ -15,6 +15,6 @@ import { ReservarPage } from './reservar.page';
     IonicModule,
     ReservarPageRoutingModule
   ],
-  declarations: [ReservarPage]
+  declarations: []
 })
 export class ReservarPageModule {}

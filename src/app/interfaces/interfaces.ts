@@ -5,23 +5,27 @@ export interface menuOpts {
 }
 
 export interface Apartamento {
-    ID: number;
     DESCRIPCION: string;
     DIRECCION: string;
     LAT: number;
     LON: number;
     IMG: string;
-    ESTADO: boolean;
+    ESTADO: string;
+    IDKEY: string;
 }
 
 export interface Cerradura {
-    ID: number;
-    IDPROP: number;
+    ACTIVA: boolean;
     CODIGO: string;
 }
 
-export interface Reserva {
-    IDPROP: number;
+export interface Alquiler {
+    IDPROP: string;
     F_INICIO: Date;
-    F_FIN: Date;
+    UID: string;
+}
+export interface Usuario {
+   EMAIL: string;
+   ROL: string;
+   UID: string;
 }

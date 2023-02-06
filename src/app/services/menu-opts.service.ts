@@ -7,11 +7,13 @@ import { menuOpts } from '../interfaces/interfaces';
 })
 
 export class MenuOptsService {
+  
 
   constructor(private http: HttpClient) { }
 
-  getMenuOptions() {
-    return this.http.get<menuOpts[]>('/assets/data/menu.json');
+  getMenuOptions(rol:string) {
+        return this.http.get<menuOpts[]>('/assets/data/menu.json');
+    
   }
 
 }
