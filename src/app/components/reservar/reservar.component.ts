@@ -34,6 +34,7 @@ export class ReservarComponent implements OnInit {
  * ****************************************
  */
   texto!: string;
+  texto1!:string;
   //daysConfig!: DaysConfig;
   // arrayDaysConfig: DaysConfig[]
   fechaActual: Date = new Date();
@@ -91,17 +92,24 @@ export class ReservarComponent implements OnInit {
 
 
   reservado() {
-    for (let i=0;i<this.fechasOcupadas2.length;i++){
-      const date= new Date(this.fechasOcupadas2[i]);
-      if(this.fechaLlegada == date){
-        console.log ('reservadoif '+this.fechaLlegada)
+    this.texto1 = '';
+    console.log(this.fechaLlegada.toString())
+    this.fechasOcupadas3= this.fechaLlegada.toString().split(',');
+    console.log(this.fechasOcupadas3)
+    for (let i=0; i< this.fechasOcupadas3.length;i++){
+      for(let j=0;j< this.fechasOcupadas2.length;j++){
+        if(this.fechasOcupadas3[i] == this.fechasOcupadas2[j]){
+          this.texto1=this.texto1+', '+this.fechasOcupadas3[i];
+        }
+
       }
-      console.log ('reservado ' +this.fechaLlegada.toISOString)
     }
+    console.log('texto1 '+this.texto1)
+    if (this.texto1 == ''){
     /**
      * TODO: lo siguiente funciona solo necesito saber como comparar las fechas que vienen con las que hay
      */
-    /*if (this.fechaLlegada != null) {
+    if (this.fechaLlegada != null) {
       //this.alert.registerAlert('alerta', 'Fecha correcta');
       this.registrarAlquiler = { F_INICIO: this.fechaLlegada, IDPROP: this.idApartamento, UID: this.uid }
 
@@ -118,7 +126,10 @@ export class ReservarComponent implements OnInit {
       this.modalCtrl.dismiss();
     } else {
       this.alert.registerAlert('alerta', 'La fecha de salida es menor que la de entrada o algún campo es null ');
-    }*/
+    }
+  }else{
+    this.alert.registerAlert('ALERTA','Las siguentes fechas están ocupadas'+ '\n'+this.texto1)
+  }
   }
 
 
