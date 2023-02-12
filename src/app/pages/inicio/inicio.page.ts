@@ -18,7 +18,7 @@ import { ImgService } from 'src/app/services/img.service';
 export class InicioPage implements OnInit {
   control = true;
   fechaLlegada: Date = new Date();
-  fechaSalida: Date = new Date();
+ 
   fechaActual : Date = new Date();
 
   coleccionApartamentos: any = [{
@@ -50,7 +50,6 @@ export class InicioPage implements OnInit {
      }
 
   ngOnInit() {
-   //this.alquileres();
     this.obtenerListaUsuarios();
     this.apartamentosDisponibles();
     
@@ -77,33 +76,8 @@ export class InicioPage implements OnInit {
     });
     
   }
-  /**
-   * 
-   * permite saber si los alquileres están diponibles segun alquileres
-   */
-  alquileres(){
-    this.firestoreService.consultar("alquileres").subscribe((consulta: any[]) => {
-      this.coleccionAlquileres = [];
-      consulta.forEach((datosTarea: any) => {
-        this.coleccionAlquileres.push({
-          id: datosTarea.payload.doc.id,
-          data: datosTarea.payload.doc.data()
-        });
-        //console.log ('alquileres'+ this.coleccionAlquileres)
-      })
-      this.coleccionAlquileres.forEach((element: any) => {
-        console.log ('alquileres '+ element.data.F_INICIO+' '+ this.fechaActual+ ' '+element.data.F_FIN)
-        if (this.fechaActual >= element.data.F_INICIO && this.fechaActual <= element.data.F_FIN) {
-           
-          this.apartamentoId(element.data.IDPROP,'ocupado');
-          }else{
-            this.apartamentoId(element.data.IDPROP,' no ocupado');
-          }
-
-      });
-    
-    });
-  }
+   
+ 
 /**
  * permite identificar el tipo de rol del usuario
  */

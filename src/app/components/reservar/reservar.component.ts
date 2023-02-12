@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { Alquiler, Apartamento } from 'src/app/interfaces/interfaces';
+import { formatDate, NgFor } from '@angular/common';
+import { Component, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
+import { AlertController, ModalController } from '@ionic/angular';
+import { CalendarComponentOptions } from 'ion2-calendar';
+import { Alquiler, Apartamento, DaysConfig } from 'src/app/interfaces/interfaces';
 import { AlertService } from 'src/app/services/alert.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 
@@ -11,26 +13,67 @@ import { FirestoreService } from 'src/app/services/firestore.service';
   styleUrls: ['./reservar.component.scss'],
 })
 export class ReservarComponent implements OnInit {
+  /**
+   * calendario
+   *
+  date!: string;
+  dateRange!: { from: string; to: string; };
+  type!: 'string';
+
+  optionsMulti: CalendarComponentOptions = {
+    pickMode: 'multi'
+  };
+  optionsRange: CalendarComponentOptions = {
+    monthFormat: 'YYYY MMMM  ',
+    weekdays: ['Dom', 'Lun', 'Mar', 'Miér', 'Jue', 'Vier', 'Sáb'],
+    monthPickerFormat: ['Ene','Febr','Mar','Abr','May','jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+    weekStart: 1,
+    daysConfig: [{date: new Date(2023,2,10) , title:'X', cssClass: 'myCal', marked: true, disable: true}]
+  };
+/**
+ * ****************************************
+ */
+  texto!: string;
+  //daysConfig!: DaysConfig;
+  // arrayDaysConfig: DaysConfig[]
   fechaActual: Date = new Date();
   apartamento: Apartamento;
   fechaLlegada: Date;
-  fechaSalida: Date;
+  fechasOcupadas!: string;
+  fechasOcupadas1!: string[];
+  fechasOcupadas2!: string[];
+  fechasOcupadas3!: string[];
+
   uid: string = '';
   idApartamento: string = '';
   registrarAlquiler: Alquiler;
 
+  coleccionAlquileres: any = [{
+    id: "",
+    data: {} as Alquiler,
+  }];
+
   constructor(
     private modalCtrl: ModalController,
     private firestoreService: FirestoreService,
-    private alert: AlertService
+    private alert: AlertService,
+    @Inject(LOCALE_ID) private locale: string,
+   
+
   ) {
     this.registrarAlquiler = {} as Alquiler;
     this.fechaLlegada = new Date();
-    this.fechaSalida = new Date();
-    this.apartamento = {} as Apartamento
+    //this.arrayDaysConfig = [];
+    this.apartamento = {} as Apartamento;
+    this.texto = '';
+    this.fechasOcupadas1 = [];
+    this.fechasOcupadas2 = [];
+    this.fechasOcupadas3 = [];
+    //this.daysConfig = {} as DaysConfig;
+    //this.arrayDaysConfig = []
   }
-
   ngOnInit() {
+    this.Ocupadas();
   }
 
   llegada(event: any) {
@@ -38,28 +81,32 @@ export class ReservarComponent implements OnInit {
     //console.log(this.fechaLlegada);
   }
 
- 
-  isWeekday = (dateString: string) => {
-    const date = new Date(dateString);
-    const utcDay = date.getUTCDay();
+  ionViewWillEnter() {
+    this.funFechasOcupadas();
+  }
 
-    /**
-     * Date will be enabled if it is not
-     * Sunday or Saturday
-     */
-    return utcDay !== 0 && utcDay !== 6;
-  };
+  /**
+   * Método que cierra el modal y envía como argumentos los datos de la reserva
+   */
 
-  //Método que cierra el modal y envía como argumentos los datos de la reserva
+
   reservado() {
-    if (this.fechaLlegada != null) {
+    for (let i=0;i<this.fechasOcupadas2.length;i++){
+      const date= new Date(this.fechasOcupadas2[i]);
+      if(this.fechaLlegada == date){
+        console.log ('reservadoif '+this.fechaLlegada)
+      }
+      console.log ('reservado ' +this.fechaLlegada.toISOString)
+    }
+    /**
+     * TODO: lo siguiente funciona solo necesito saber como comparar las fechas que vienen con las que hay
+     */
+    /*if (this.fechaLlegada != null) {
       //this.alert.registerAlert('alerta', 'Fecha correcta');
       this.registrarAlquiler = { F_INICIO: this.fechaLlegada, IDPROP: this.idApartamento, UID: this.uid }
 
-      //this.apartamentoId(this.idApartamento)
+
       this.firestoreService.insertar("alquileres", this.registrarAlquiler).then(() => {
-        //console.log('Tarea creada correctamente!');
-        //this.firestoreService.actualizar('apartamentos', this.idApartamento, this.apartamento);
         this.registrarAlquiler = {} as Alquiler;
         this.alert.registerAlert('alerta', 'Alquiler insertado');
       }, (error) => {
@@ -71,21 +118,61 @@ export class ReservarComponent implements OnInit {
       this.modalCtrl.dismiss();
     } else {
       this.alert.registerAlert('alerta', 'La fecha de salida es menor que la de entrada o algún campo es null ');
-    }
+    }*/
   }
-/**
- * 
- * método que se usa para cambiar e apartamento de no usado a usado
- */
- 
 
-  //Método que cierra el modal sin haber reservado
+
+  /**
+   * Método que cierra el modal sin haber reservado
+   */
+
   cancelado() {
-    this.modalCtrl.dismiss({
-      cancelado: 'No se ha reservado'
-    });
+    this.modalCtrl.dismiss();
   }
 
+  /**
+   * fechas ocupadas
+   */
+  Ocupadas() {
+
+    this.firestoreService.consultar('alquileres').subscribe((consulta: any[]) => {
+      this.coleccionAlquileres = [];
+      console.log('dentro de resultadoConsulta');
+      consulta.forEach((datos: any) => {
+        this.coleccionAlquileres.push({
+          id: datos.payload.doc.id,
+          data: datos.payload.doc.data()
+        });
+        // console.log('fechas1'+this.coleccionAlquileres);
+
+      });
+      const filtro = this.coleccionAlquileres.filter((element: { data: { IDPROP: string; F_INICIO: any; }; }) => {
+        return element.data.IDPROP === this.idApartamento;
+      });
+      const fechasOcupadas = filtro.map((element: { data: { F_INICIO: any; }; }) => element.data.F_INICIO);
+      this.texto = fechasOcupadas.toString();
+      console.log('string textoOcupadas '+this.texto)
+    });
+
+  }
+    /**
+     * Permite ver las fechas ordenadas que están ocupadas
+     */
+  funFechasOcupadas() {
+    //console.log( 'fechas ocupadas ' + this.texto)
+    this.fechasOcupadas1 = this.texto.split(',');
+    const date = new Date()
+    this.fechasOcupadas2 = [];
+    for (let i = 0; i < this.fechasOcupadas1.length; i++) {
+      const date1 = new Date(this.fechasOcupadas1[i]);
+      if (date < date1) {
+        this.fechasOcupadas2.push(this.fechasOcupadas1[i])
+      }
+    }
+    this.fechasOcupadas2.sort();
+  }
+
+  // Selected date reange and hence title changed
 
 
 }

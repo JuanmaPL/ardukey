@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -14,11 +14,12 @@ import{AngularFireModule} from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { FirestoreService } from './services/firestore.service';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { ImgService } from './services/img.service';
 import { CommonModule } from '@angular/common';
-
+import { CalendarModule } from 'ion2-calendar';
+import { BLE } from '@awesome-cordova-plugins/ble/ngx';
 
 
 
@@ -38,15 +39,19 @@ import { CommonModule } from '@angular/common';
     AppRoutingModule,
     HttpClientModule,
     ComponentsModule,
+    CalendarModule,
 
     
     
   ],
   providers: [{ 
+   
     provide: RouteReuseStrategy, 
-    useClass: IonicRouteStrategy }, 
+    useClass: IonicRouteStrategy },
+    BLE, 
     FirestoreService,
     ImgService,
+    {provide: LOCALE_ID, useValue: 'es-ES'}
   ],
   bootstrap: [AppComponent],
 })

@@ -26,6 +26,7 @@ export class FirestoreService {
    }
 
    public consultarPorId(coleccion: string, documentId: string) {
+    
     return this.angularFirestore.collection(coleccion).doc(documentId).get();
 
   }
@@ -35,11 +36,11 @@ export class FirestoreService {
                       .snapshotChanges();
  */
   public consultarPorCampo (coleccion:string, campo: string, predicado:any) {
-    console.log(coleccion ,campo,predicado);
+    console.log('servicio consulta por campo '+coleccion+' '+ campo+' '+predicado);
     return this.angularFirestore.collection(coleccion, ref => ref.where(campo, '==' ,predicado)).snapshotChanges();
   }
   public consultarPorCampoGet (coleccion:string, campo: string, predicado:any) {
-    console.log(coleccion ,campo,predicado);
+    console.log('servicio consulta por campo '+coleccion+' '+ campo+' '+predicado);
     return this.angularFirestore.collection(coleccion, ref => ref.where(campo, '==' ,predicado)).get();
   }
   

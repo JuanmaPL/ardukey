@@ -11,44 +11,24 @@
   <ion-list>
 
     <ion-list-header>
-      <h3>Datos de la reserva</h3>
+      <h3>Fechas Ocupadas</h3>
     </ion-list-header>
-    <ion-item>
-      <ion-datetime #date2
-                  [isDateEnabled]="isWeekday"
-                  locale="es-ES"
-                  id="calendario"
-                  mode="MD"
-                  presentation="date"
-                  [multiple]="true"
-                  [firstDayOfWeek]="1"
-                  [min]="fechaActual.toISOString()"
-                  (ionChange)="llegada($event)">
+    <ion-item  *ngFor="let item of fechasOcupadas2">
+      <ion-row><ion-col><p>{{item}}</p></ion-col></ion-row>
+    <!--  <ion-calendar
+      [options]="optionsRange"
+      [type]="type"
+      [format]="'YYYY-MM-DD'"
+      >
+      </ion-calendar>-->
 
-      <ion-buttons slot="buttons">
-        <ion-button color="primary" (click)="date2.confirm()">Done</ion-button>
-        <ion-button color="warning" (click)="date2.reset()">Reset</ion-button>
-        <ion-button color="danger" (click)="date2.cancel()">Cancel</ion-button>
-      </ion-buttons>
-
-    </ion-datetime>
-
-
-    </ion-item>
-
-
-
-
+  
+      </ion-item>
 
     <ion-item>
-      <ion-label>Fecha de llegada</ion-label>
+      <ion-label><strong>Fechas a reservar</strong></ion-label>
       <ion-datetime-button datetime="llegada"></ion-datetime-button>
     </ion-item>
-
-   <!-- <ion-item>
-      <ion-label>Fecha de salida</ion-label>
-      <ion-datetime-button datetime="salida"></ion-datetime-button>
-    </ion-item>-->
 
   </ion-list>
 

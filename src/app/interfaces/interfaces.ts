@@ -4,6 +4,14 @@ export interface menuOpts {
     redirectTo: string;
 }
 
+export interface DaysConfig {
+    date: Date; 
+    subTitle: string;
+    cssClass: String;
+    marked: boolean; 
+    disable: true;
+}
+
 export interface Apartamento {
     DESCRIPCION: string;
     DIRECCION: string;

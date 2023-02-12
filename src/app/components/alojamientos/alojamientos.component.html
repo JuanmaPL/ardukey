@@ -11,18 +11,29 @@
 </ion-header>
 
 <ion-content>
+  <ion-list>
+  <ion-list-header>
+    <h3>Fechas Ocupadas</h3>
+  </ion-list-header>
+  <ion-item  *ngFor="let item of fechasOcupadas1">
+    <ion-row><ion-col><p>{{item}}</p></ion-col></ion-row>
+
+    </ion-item>
+
+</ion-list>
   <ion-item lines="none" >
     <ion-card>
      
       <ion-card-header>
-        <ion-card-title>fecha actual</ion-card-title>
-        <ion-card-subtitle>intervalo de fechas</ion-card-subtitle>
+        <ion-card-title>{{nombreApartamento}}</ion-card-title>
+        <ion-card-subtitle>{{fechaActual}}</ion-card-subtitle>
       </ion-card-header>
 
       <ion-card-content>
+       
         <ion-buttons slot="start">
-          <ion-button (click)="reservar()">
-            <ion-icon slot="icon-only"size="large" color="success" name="calendar-outline"></ion-icon>
+          <ion-button (click)="llave()" [disabled]="control">
+            <ion-icon slot="icon-only"size="large" color="success" name="key-outline"></ion-icon>
           </ion-button>
           
         </ion-buttons>

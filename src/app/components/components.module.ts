@@ -14,6 +14,7 @@ import { InsertarCerradComponent } from './insertar-cerrad/insertar-cerrad.compo
 import { MapsComponent } from './maps/maps.component';
 import { RegisterComponent } from './register/register.component';
 import { ReservarComponent } from './reservar/reservar.component';
+import { CalendarModule } from 'ion2-calendar';
 
 
 
@@ -30,6 +31,7 @@ import { ReservarComponent } from './reservar/reservar.component';
     MapsComponent,
     RegisterComponent,
     ReservarComponent,
+    
 
   ],
   exports: [
@@ -51,6 +53,7 @@ import { ReservarComponent } from './reservar/reservar.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    CalendarModule,
   
   ]
 })
