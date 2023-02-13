@@ -45,7 +45,7 @@ export class AlojamientosComponent implements OnInit {
   fechasOcupadas1!: string[];
   fechasOcupadas2!: string[];
   fechaActual = new Date().toDateString();
-  idPropiedad: string
+  idPropiedad = '';
   preview: any;
 
   constructor(
@@ -80,7 +80,7 @@ export class AlojamientosComponent implements OnInit {
     for (let i = 0; i < this.fechasOcupadas1.length; i++) {
       const date1 = new Date(this.fechasOcupadas1[i])
       const date2 = new Date(this.fechaActual)
-      console.log('date1 ' + date1 + ' date2 ' + date2)
+     // console.log('date1 ' + date1 + ' date2 ' + date2)
       if (date1.getTime() == date2.getTime()) {
         console.log('dentro del if')
         this.control = false;
@@ -90,7 +90,7 @@ export class AlojamientosComponent implements OnInit {
 
 
   alquileres() {
-    console.log('uid usuario' + localStorage.getItem('uid'))
+    console.log('uid usuario 1: ' + localStorage.getItem('uid'))
     this.firestoreService.consultar('alquileres').subscribe((consulta: any[]) => {
       this.coleccionAlquileres = [];
       console.log('dentro de resultadoConsulta');
@@ -108,10 +108,12 @@ export class AlojamientosComponent implements OnInit {
       const fechasOcupadas = filtro.map((element: { data: { F_INICIO: any; }; }) => element.data.F_INICIO);
       localStorage.setItem('fecha', fechasOcupadas.toString());
       const idPropiedad = filtro.map((element: { data: { IDPROP: string; }; }) => element.data.IDPROP);
-      localStorage.setItem('idPropiedad', idPropiedad.toString());
+      console.log('fechas ocupadas '+ fechasOcupadas)  
+       console.log('id propiedad '+ idPropiedad[0])
+      localStorage.setItem('idPropiedad', idPropiedad[0].toString());
       //this.idPropiedad=idPropiedad.toString();
 
-      // console.log('fechas Apartamentos Ocupar '+this.texto)
+      // console.log('id propiedad)
 
     });
   }
@@ -119,19 +121,21 @@ export class AlojamientosComponent implements OnInit {
    * 
    */
   apartamento() {
-    console.log('apartamento' + this.idPropiedad);
+    console.log('apartamento 1: ' + this.idPropiedad);
     this.firestoreService.consultarPorId('apartamentos', this.idPropiedad).subscribe((resultado) => {
       if (resultado.exists) {
+        console.log('dentro resultado.exist')
         this.coleccionApartamentos.id = resultado.id
         this.coleccionApartamentos.data = resultado.data();
         this.nombreApartamento = this.coleccionApartamentos.data.DESCRIPCION;
         this.idKey = this.coleccionApartamentos.data.IDKEY;
 
-        console.log('apartamento nombre e Idkey ' + this.nombreApartamento + ' ' + this.idKey)
+        console.log('apartamento nombre  IF 1' + this.nombreApartamento + ' 2 idKey Apartamento ' + this.idKey)
 
       } else {
         // No se ha encontrado un document con ese ID. Vaciar los datos que hubiera
         this.coleccionApartamentos.data = {} as Apartamento;
+        console.log ('fuera de resultado exist')
       }
     });
   }
@@ -139,7 +143,7 @@ export class AlojamientosComponent implements OnInit {
    * 
    */
   cerradura() {
-    console.log('apartamento' + this.idPropiedad);
+    console.log('apartamento cerradura ' + this.idPropiedad+' idKey'+this.idKey);
     this.firestoreService.consultarPorId('cerraduras', this.idKey).subscribe((resultado) => {
       if (resultado.exists) {
         this.coleccionCerraduras.id = resultado.id
@@ -201,13 +205,15 @@ export class AlojamientosComponent implements OnInit {
 
   llave() {
 
-    console.log('uid usuario' + localStorage.getItem('uid'))
+    //console.log('uid usuario LLave ' + localStorage.getItem('uid'))
     this.cerradura();
 
-    console.log('cerradura ' + this.key);
+    console.log('cerradura llave: ' + this.key);
     if(this.key != ''){
-      console.log('llama  a apertura '+this.key)
+     // console.log('llama  a apertura '+this.key)
+      if (this.key != ''){
       this.apertura(this.key);
+      }
     }
 
 
@@ -235,15 +241,17 @@ export class AlojamientosComponent implements OnInit {
    * Apertura
    */
   async apertura(key:string) {
+    //console.log('apertura async '+key)
     const direccion ='78:E3:6D:11:B1:CA';
     await this.ble.isEnabled().then(
       ()=>{
-        this.ble.connect(direccion).subscribe({next: () => {/*this.messageFunction('Conectado');*/
+        this.ble.connect(direccion).subscribe({next: () => {
+          setTimeout(() => {}, 200);//retardo 200 msg
+          /*this.messageFunction('Conectado');*/
         this.ble.write(direccion, this.UART_SERVICE, this.UART_TX, this.stringToBytes(key) );
-       // setTimeout(()=>{},2000);//RETARDO 
-        //this.ble.write(direccion, this.UART_SERVICE, this.UART_TX, this.stringToBytes('apagar') );
           },
         error: () => {this.alert.registerAlert('Alerta','error al conectar')}});
+        setTimeout(() => {}, 100);
         this.ble.disconnect(direccion).catch(() => {this.alert.registerAlert('Alerta','problemas al desconectar')});
 
       }).

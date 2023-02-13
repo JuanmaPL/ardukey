@@ -26,7 +26,7 @@ export class FirestoreService {
    }
 
    public consultarPorId(coleccion: string, documentId: string) {
-    
+    console.log ('Coleccion '+ coleccion+ 'Id '+documentId)
     return this.angularFirestore.collection(coleccion).doc(documentId).get();
 
   }

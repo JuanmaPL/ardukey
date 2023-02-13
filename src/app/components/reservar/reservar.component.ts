@@ -34,7 +34,7 @@ export class ReservarComponent implements OnInit {
  * ****************************************
  */
   texto!: string;
-  texto1!:string;
+  texto1!: string;
   //daysConfig!: DaysConfig;
   // arrayDaysConfig: DaysConfig[]
   fechaActual: Date = new Date();
@@ -59,7 +59,7 @@ export class ReservarComponent implements OnInit {
     private firestoreService: FirestoreService,
     private alert: AlertService,
     @Inject(LOCALE_ID) private locale: string,
-   
+
 
   ) {
     this.registrarAlquiler = {} as Alquiler;
@@ -93,43 +93,39 @@ export class ReservarComponent implements OnInit {
 
   reservado() {
     this.texto1 = '';
-    console.log(this.fechaLlegada.toString())
-    this.fechasOcupadas3= this.fechaLlegada.toString().split(',');
-    console.log(this.fechasOcupadas3)
-    for (let i=0; i< this.fechasOcupadas3.length;i++){
-      for(let j=0;j< this.fechasOcupadas2.length;j++){
-        if(this.fechasOcupadas3[i] == this.fechasOcupadas2[j]){
-          this.texto1=this.texto1+', '+this.fechasOcupadas3[i];
-        }
+    console.log(this.fechaLlegada.toString());
+    this.fechasOcupadas3 = this.fechaLlegada.toString().split(',');
+    console.log(this.fechasOcupadas3);
 
+    for (let i = 0; i < this.fechasOcupadas3.length; i++) {
+      if (this.fechasOcupadas2.includes(this.fechasOcupadas3[i])) {
+        this.texto1 = this.texto1 + ', ' + this.fechasOcupadas3[i];
       }
     }
-    console.log('texto1 '+this.texto1)
-    if (this.texto1 == ''){
-    /**
-     * TODO: lo siguiente funciona solo necesito saber como comparar las fechas que vienen con las que hay
-     */
-    if (this.fechaLlegada != null) {
-      //this.alert.registerAlert('alerta', 'Fecha correcta');
-      this.registrarAlquiler = { F_INICIO: this.fechaLlegada, IDPROP: this.idApartamento, UID: this.uid }
+    console.log('texto1 ' + this.texto1)
+    if (this.texto1 == '') {
+      
+      if (this.fechaLlegada != null) {
+        //this.alert.registerAlert('alerta', 'Fecha correcta');
+        this.registrarAlquiler = { F_INICIO: this.fechaLlegada, IDPROP: this.idApartamento, UID: this.uid }
 
 
-      this.firestoreService.insertar("alquileres", this.registrarAlquiler).then(() => {
-        this.registrarAlquiler = {} as Alquiler;
-        this.alert.registerAlert('alerta', 'Alquiler insertado');
-      }, (error) => {
-        this.alert.registerAlert('alerta', 'Error al insertar: ' + error);
-        //console.error('Error al insertar: ' + error);
-      })
+        this.firestoreService.insertar("alquileres", this.registrarAlquiler).then(() => {
+          this.registrarAlquiler = {} as Alquiler;
+          this.alert.registerAlert('alerta', 'Alquiler insertado');
+        }, (error) => {
+          this.alert.registerAlert('alerta', 'Error al insertar: ' + error);
+          //console.error('Error al insertar: ' + error);
+        })
 
 
-      this.modalCtrl.dismiss();
+        this.modalCtrl.dismiss();
+      } else {
+        this.alert.registerAlert('alerta', 'La fecha de salida es menor que la de entrada o algún campo es null ');
+      }
     } else {
-      this.alert.registerAlert('alerta', 'La fecha de salida es menor que la de entrada o algún campo es null ');
+      this.alert.registerAlert('ALERTA', 'Las siguentes fechas están ocupadas' + '\n' + this.texto1)
     }
-  }else{
-    this.alert.registerAlert('ALERTA','Las siguentes fechas están ocupadas'+ '\n'+this.texto1)
-  }
   }
 
 
@@ -162,13 +158,13 @@ export class ReservarComponent implements OnInit {
       });
       const fechasOcupadas = filtro.map((element: { data: { F_INICIO: any; }; }) => element.data.F_INICIO);
       this.texto = fechasOcupadas.toString();
-      console.log('string textoOcupadas '+this.texto)
+      console.log('string textoOcupadas ' + this.texto)
     });
 
   }
-    /**
-     * Permite ver las fechas ordenadas que están ocupadas
-     */
+  /**
+   * Permite ver las fechas ordenadas que están ocupadas
+   */
   funFechasOcupadas() {
     //console.log( 'fechas ocupadas ' + this.texto)
     this.fechasOcupadas1 = this.texto.split(',');
