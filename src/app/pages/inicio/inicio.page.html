@@ -15,6 +15,9 @@
           <ion-button (click)="reservar(item.id)" [disabled] ='control'>
             <ion-icon slot="icon-only"size="large"  color="success" name="home-outline"></ion-icon>
           </ion-button>
+            <ion-button (click)="anular(item.id)" [disabled] ='control'>
+              <ion-icon slot="icon-only"size="large"  color="success" name="trash-bin-outline"></ion-icon>
+            </ion-button>
           <ion-button (click)="map(item.data.LAT, item.data.LON)">
             <ion-icon slot="icon-only" color="success" name="map-outline"></ion-icon>
           </ion-button>

@@ -15,6 +15,7 @@ import { MapsComponent } from './maps/maps.component';
 import { RegisterComponent } from './register/register.component';
 import { ReservarComponent } from './reservar/reservar.component';
 import { CalendarModule } from 'ion2-calendar';
+import { AnularReservaComponent } from './anular-reserva/anular-reserva.component';
 
 
 
@@ -31,6 +32,7 @@ import { CalendarModule } from 'ion2-calendar';
     MapsComponent,
     RegisterComponent,
     ReservarComponent,
+    AnularReservaComponent
     
 
   ],
@@ -45,7 +47,8 @@ import { CalendarModule } from 'ion2-calendar';
     InsertarCerradComponent,
     MapsComponent,
     RegisterComponent,
-    ReservarComponent
+    ReservarComponent,
+    AnularReservaComponent
   ],
   imports: [
     CommonModule,

@@ -43,7 +43,8 @@ export class FirestoreService {
     console.log('servicio consulta por campo '+coleccion+' '+ campo+' '+predicado);
     return this.angularFirestore.collection(coleccion, ref => ref.where(campo, '==' ,predicado)).get();
   }
-  
+ 
+ 
 
 }
 

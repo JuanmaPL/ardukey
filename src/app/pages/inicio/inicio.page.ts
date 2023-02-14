@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AlojamientosComponent } from 'src/app/components/alojamientos/alojamientos.component';
+import { AnularReservaComponent } from 'src/app/components/anular-reserva/anular-reserva.component';
 import { MapsComponent } from 'src/app/components/maps/maps.component';
 import { ReservarComponent } from 'src/app/components/reservar/reservar.component';
 import { Alquiler, Apartamento, Usuario } from 'src/app/interfaces/interfaces';
@@ -104,6 +105,19 @@ export class InicioPage implements OnInit {
 
     const modal = await this.modalCtrl.create({
       component: ReservarComponent,
+      componentProps: {idApartamento: id, uid: localStorage.getItem('uid')}
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    console.log(data);
+
+  }
+  async anular( id:string) {
+
+    const modal = await this.modalCtrl.create({
+      component: AnularReservaComponent,
       componentProps: {idApartamento: id, uid: localStorage.getItem('uid')}
     });
 
