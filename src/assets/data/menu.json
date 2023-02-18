@@ -10,8 +10,8 @@
         "redirectTo": "/settings"
     },
     {
-        "icon": "information-circle-sharp",
-        "name": "Acerca de",
+        "icon": "help-circle-sharp",
+        "name": "Ayuda",
         "redirectTo": "/info"
     }
 ]
