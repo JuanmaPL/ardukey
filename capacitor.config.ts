@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
-  appName: 'ardukey',
+  appName: 'ESP Open-Lock',
   webDir: 'www',
   bundledWebRuntime: false
 };

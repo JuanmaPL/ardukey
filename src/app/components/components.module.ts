@@ -8,7 +8,7 @@ import { HeaderTabsComponent } from './header-tabs/header-tabs.component';
 import { AlojamientosComponent } from './alojamientos/alojamientos.component';
 import { ApartamentosComponent } from './apartamentos/apartamentos.component';
 import { InsertarApartComponent } from './insertar-apart/insertar-apart.component';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CerradurasComponent } from './cerraduras/cerraduras.component';
 import { InsertarCerradComponent } from './insertar-cerrad/insertar-cerrad.component';
 import { MapsComponent } from './maps/maps.component';
@@ -16,6 +16,7 @@ import { RegisterComponent } from './register/register.component';
 import { ReservarComponent } from './reservar/reservar.component';
 import { CalendarModule } from 'ion2-calendar';
 import { AnularReservaComponent } from './anular-reserva/anular-reserva.component';
+
 
 
 

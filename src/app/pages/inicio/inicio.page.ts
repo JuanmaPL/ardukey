@@ -53,7 +53,6 @@ export class InicioPage implements OnInit {
   ngOnInit() {
     this.obtenerListaUsuarios();
     this.apartamentosDisponibles();
-    
   } 
   ionViewWillEnter(){
     if (localStorage.getItem('rol') === 'user'){
@@ -77,8 +76,6 @@ export class InicioPage implements OnInit {
     });
     
   }
-   
- 
 /**
  * permite identificar el tipo de rol del usuario
  */
@@ -124,7 +121,7 @@ export class InicioPage implements OnInit {
     await modal.present();
 
     const { data } = await modal.onWillDismiss();
-    console.log(data);
+    //console.log(data);
 
   }
 

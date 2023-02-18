@@ -90,10 +90,10 @@ export class AlojamientosComponent implements OnInit {
 
 
   alquileres() {
-    console.log('uid usuario 1: ' + localStorage.getItem('uid'))
+   // console.log('uid usuario 1: ' + localStorage.getItem('uid'))
     this.firestoreService.consultar('alquileres').subscribe((consulta: any[]) => {
       this.coleccionAlquileres = [];
-      console.log('dentro de resultadoConsulta');
+      //console.log('dentro de resultadoConsulta');
       consulta.forEach((datos: any) => {
         this.coleccionAlquileres.push({
           id: datos.payload.doc.id,
@@ -121,7 +121,7 @@ export class AlojamientosComponent implements OnInit {
    * 
    */
   apartamento() {
-    console.log('apartamento 1: ' + this.idPropiedad);
+    //console.log('apartamento 1: ' + this.idPropiedad);
     this.firestoreService.consultarPorId('apartamentos', this.idPropiedad).subscribe((resultado) => {
       if (resultado.exists) {
         console.log('dentro resultado.exist')
@@ -135,7 +135,7 @@ export class AlojamientosComponent implements OnInit {
       } else {
         // No se ha encontrado un document con ese ID. Vaciar los datos que hubiera
         this.coleccionApartamentos.data = {} as Apartamento;
-        console.log ('fuera de resultado exist')
+        //console.log ('fuera de resultado exist')
       }
     });
   }
@@ -179,30 +179,6 @@ export class AlojamientosComponent implements OnInit {
     localStorage.setItem('fecha', '');
   }
 
-  /* obtenerListaUsuarios(){
-     console.log('dentro de obtener Lista  '+localStorage.getItem('uid'));
-     this.firestoreService.consultar("usuarios").subscribe((consulta: any[]) => {
-       this.coleccionUsuarios = [];
-       console.log('dentro de resultadoConsulta');
-       consulta.forEach((datosTarea: any) => {
-         this.coleccionUsuarios.push({
-           id: datosTarea.payload.doc.id,
-           data: datosTarea.payload.doc.data()
-         });
-          //console.log(this.coleccionUsuarios);
-         
-       })
-      
-       this.coleccionUsuarios.forEach((element: any) => {
-         if (element.data.UID === localStorage.getItem('uid')) {localStorage.setItem('rol',element.data.ROL)}                     
-       });
- 
-      // console.log('Rol Usuario es '+localStorage.getItem('rol'))
-     
-     });
-     console.log('Rol Usuario es '+localStorage.getItem('rol'))
-   }*/
-
   llave() {
 
     //console.log('uid usuario LLave ' + localStorage.getItem('uid'))
@@ -220,7 +196,7 @@ export class AlojamientosComponent implements OnInit {
   }
   
   /**
-   * 
+   * cerrar el programa
    */
   cerrar() { this.modalCtrl.dismiss(); }
   /**
@@ -246,8 +222,7 @@ export class AlojamientosComponent implements OnInit {
     await this.ble.isEnabled().then(
       ()=>{
         this.ble.connect(direccion).subscribe({next: () => {
-          setTimeout(() => {}, 200);//retardo 200 msg
-          /*this.messageFunction('Conectado');*/
+          setTimeout(() => {}, 200);
         this.ble.write(direccion, this.UART_SERVICE, this.UART_TX, this.stringToBytes(key) );
           },
         error: () => {this.alert.registerAlert('Alerta','error al conectar')}});
