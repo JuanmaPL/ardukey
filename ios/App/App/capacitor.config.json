@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "ESP Open-Lock",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
