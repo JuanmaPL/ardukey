@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
 
-const mensaje: string = 'Desarrolladores:<br><br>Jesús Medina Naranjo<br>Aythami Déniz Morales<br><br>3º de Desarrollo de Aplicaciones Multiplataforma';
+const mensaje: string = '3º de Desarrollo de Aplicaciones Multiplataforma';
 
 @Component({
   selector: 'app-info',
